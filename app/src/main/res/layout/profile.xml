@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/itachi"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="#07000000"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:textSize="40dp"
+        android:padding="20dp"
+        android:textAlignment="center"
+        android:textColor="#81aecd"
+        android:text="Uploader Profile" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="#07000000"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:padding="20dp"
+        android:text="Video:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="15dp"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/un"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="#07000000"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:padding="20dp"
+        android:text="Uploader Name:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/cn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="#07000000"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:padding="20dp"
+        android:text="Channel:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="15dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="#07000000"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:padding="20dp"
+        android:textSize="15dp"
+        android:textColor="@color/cardview_light_background"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/subs"
+        android:text="Subscribers" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/Button"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center|start|center_horizontal"
+            android:layout_marginStart="144dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="44dp"
+            android:gravity="center|center_horizontal"
+            android:text="Back"
+            android:textSize="30px"></Button>
+    </LinearLayout>
+</LinearLayout>
