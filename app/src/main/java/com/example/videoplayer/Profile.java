@@ -17,6 +17,7 @@ public class Profile extends MainActivity {
     TextView Name,Un,Cn,Subs;
 
     public void onCreate(Bundle savedInstanceState) {
+        se=1;
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.profile);
@@ -85,6 +86,12 @@ public class Profile extends MainActivity {
                 }
         }
         return false;
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        si=1;
+        super.onUserLeaveHint();
     }
 
     @Override

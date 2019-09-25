@@ -16,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import static java.lang.Math.abs;
 
 public class MainActivity extends AppCompatActivity {
-public static int count=0,vi=0,sps,hsps;
-float x1,x2,y1,y2;
+    public static int count=0,vi=0,sps,hsps,se=0,si=0;
+    float x1,x2,y1,y2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,43 +43,43 @@ float x1,x2,y1,y2;
         VideoView videoView =(VideoView)findViewById(R.id.vdVw);
         View view = findViewById(R.id.rv);
         Snackbar snackbar = Snackbar.make(view,"Channel Subscribed", Snackbar.LENGTH_LONG);
-            if(!videoView.isPlaying() && videoView.getCurrentPosition()==0) {
-                videoView.seekTo(hsps);
-                videoView.start();
-            }
-              switch (touchEvent.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    x1 = touchEvent.getX();
-                    y1 = touchEvent.getY();
-                    break;
-                case MotionEvent.ACTION_UP:
-                    x2 = touchEvent.getX();
-                    y2 = touchEvent.getY();
-                    if (y1 < y2 && abs(x1 - x2) < abs(y1 - y2) && abs(y1-y2)>200) {
-                        playNext(-1);
-                    } else if ((y1 > y2) && (abs(x1 - x2) < abs(y1 - y2)&& abs(y1-y2)>200)) {
-                        playNext(1);
-                    } else if (x1>x2 && abs(x1-x2)>200){
-                        snackbar.show();
-                    } else if (x2>x1 && abs(x1-x2)>200){
-                        profile();
-                    }
+        if(!videoView.isPlaying() && videoView.getCurrentPosition()==0) {
+            videoView.seekTo(hsps);
+            videoView.start();
+        }
+        switch (touchEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                x1 = touchEvent.getX();
+                y1 = touchEvent.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = touchEvent.getX();
+                y2 = touchEvent.getY();
+                if (y1 < y2 && abs(x1 - x2) < abs(y1 - y2) && abs(y1-y2)>200) {
+                    playNext(-1);
+                } else if ((y1 > y2) && (abs(x1 - x2) < abs(y1 - y2)&& abs(y1-y2)>200)) {
+                    playNext(1);
+                } else if (x1>x2 && abs(x1-x2)>200){
+                    snackbar.show();
+                } else if (x2>x1 && abs(x1-x2)>200){
+                    profile();
+                }
 
-                    break;
-            }
+                break;
+        }
         return false;
     }
 
- @SuppressLint("SetTextI18n")
- void profile(){
-     VideoView videoView =(VideoView)findViewById(R.id.vdVw);
-     sps = videoView.getCurrentPosition();
-     videoView.stopPlayback();
+    @SuppressLint("SetTextI18n")
+    void profile(){
+        VideoView videoView =(VideoView)findViewById(R.id.vdVw);
+        sps = videoView.getCurrentPosition();
+        videoView.stopPlayback();
         View view=findViewById(R.id.rv);
-     Intent myIntent = new Intent(view.getContext(),Profile.class);
-     startActivityForResult(myIntent, 0);
-     overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
- }
+        Intent myIntent = new Intent(view.getContext(),Profile.class);
+        startActivityForResult(myIntent, 0);
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
 
     void playNext(int i) {
         VideoView videoView =(VideoView)findViewById(R.id.vdVw);
@@ -109,8 +109,32 @@ float x1,x2,y1,y2;
     @Override
     protected void onUserLeaveHint() {
         VideoView videoView=(VideoView)findViewById(R.id.vdVw);
+        if(se==0)
         hsps=videoView.getCurrentPosition();
         super.onUserLeaveHint();
+    }
+
+    @Override
+    protected void onRestart() {
+        VideoView videoView=(VideoView)findViewById(R.id.vdVw);
+        if(si==0) {
+            if (se == 0)
+                videoView.seekTo(hsps);
+            else
+                videoView.seekTo(sps);
+            if(vi==0)
+                videoView.start();
+        }
+        si=0;
+        super.onRestart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        //if(se==0)
+
+        super.onDestroy();
+        se=0;
     }
 
     @Override
@@ -118,8 +142,8 @@ float x1,x2,y1,y2;
         VideoView videoView =(VideoView)findViewById(R.id.vdVw);
         videoView.seekTo(sps);
         if(vi==0)
-        videoView.start();
-        sps=0;
+            videoView.start();
+        //sps=0;
     }
 
     @Override
@@ -133,13 +157,13 @@ float x1,x2,y1,y2;
         int id = item.getItemId();
         VideoView videoView =(VideoView)findViewById(R.id.vdVw);
         if (id == R.id.ppbtn) {
-                if(videoView.isPlaying()){
-                    videoView.pause();
-                    vi=1;
-                }else{
-                    vi=0;
-                    videoView.start();
-                }
+            if(videoView.isPlaying()){
+                videoView.pause();
+                vi=1;
+            }else{
+                vi=0;
+                videoView.start();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
