@@ -17,7 +17,7 @@ public class Profile extends MainActivity {
     TextView Name,Un,Cn,Subs;
 
     public void onCreate(Bundle savedInstanceState) {
-        se=1;
+        InFIrst=false;
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.profile);
@@ -90,7 +90,7 @@ public class Profile extends MainActivity {
 
     @Override
     protected void onUserLeaveHint() {
-        si=1;
+        firstInterface=false;
         super.onUserLeaveHint();
     }
 

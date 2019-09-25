@@ -16,8 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import static java.lang.Math.abs;
 
 public class MainActivity extends AppCompatActivity {
-    public static int count=0,vi=0,sps,hsps,se=0,si=0;
+    public static int count=0,sps,hsps;
     float x1,x2,y1,y2;
+    public static boolean play=true,firstInterface=true,InFIrst=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onUserLeaveHint() {
         VideoView videoView=(VideoView)findViewById(R.id.vdVw);
-        if(se==0)
+        if(InFIrst)
         hsps=videoView.getCurrentPosition();
         super.onUserLeaveHint();
     }
@@ -117,15 +118,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         VideoView videoView=(VideoView)findViewById(R.id.vdVw);
-        if(si==0) {
-            if (se == 0)
+        if(firstInterface) {
+            if (InFIrst)
                 videoView.seekTo(hsps);
             else
                 videoView.seekTo(sps);
-            if(vi==0)
+            if(play)
                 videoView.start();
         }
-        si=0;
+        firstInterface=true;
         super.onRestart();
     }
 
@@ -134,14 +135,14 @@ public class MainActivity extends AppCompatActivity {
         //if(se==0)
 
         super.onDestroy();
-        se=0;
+        InFIrst=true;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         VideoView videoView =(VideoView)findViewById(R.id.vdVw);
         videoView.seekTo(sps);
-        if(vi==0)
+        if(play)
             videoView.start();
         //sps=0;
     }
@@ -157,11 +158,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         VideoView videoView =(VideoView)findViewById(R.id.vdVw);
         if (id == R.id.ppbtn) {
-            if(videoView.isPlaying()){
+            if(play){
                 videoView.pause();
-                vi=1;
+                play=false;
             }else{
-                vi=0;
+                play=true;
                 videoView.start();
             }
         }
