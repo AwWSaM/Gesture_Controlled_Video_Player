@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import static java.lang.Math.abs;
 
 public class MainActivity extends AppCompatActivity {
-public static int count=0,vi=0,sps;
+public static int count=0,vi=0,sps,hsps;
 float x1,x2,y1,y2;
 
     @Override
@@ -43,8 +43,10 @@ float x1,x2,y1,y2;
         VideoView videoView =(VideoView)findViewById(R.id.vdVw);
         View view = findViewById(R.id.rv);
         Snackbar snackbar = Snackbar.make(view,"Channel Subscribed", Snackbar.LENGTH_LONG);
-            if(!videoView.isPlaying() && videoView.getCurrentPosition()==0)
+            if(!videoView.isPlaying() && videoView.getCurrentPosition()==0) {
+                videoView.seekTo(hsps);
                 videoView.start();
+            }
               switch (touchEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     x1 = touchEvent.getX();
@@ -102,6 +104,13 @@ float x1,x2,y1,y2;
             count=4;
         }
         videoView.setVideoURI(uri);
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        VideoView videoView=(VideoView)findViewById(R.id.vdVw);
+        hsps=videoView.getCurrentPosition();
+        super.onUserLeaveHint();
     }
 
     @Override
