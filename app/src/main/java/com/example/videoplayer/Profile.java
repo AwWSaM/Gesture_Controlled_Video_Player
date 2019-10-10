@@ -89,9 +89,9 @@ public class Profile extends MainActivity {
     }
 
     @Override
-    protected void onUserLeaveHint() {
+    protected void onDestroy() {
         firstInterface=false;
-        super.onUserLeaveHint();
+        super.onDestroy();
     }
 
     @Override

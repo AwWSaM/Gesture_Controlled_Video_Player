@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         VideoView videoView =(VideoView)findViewById(R.id.vdVw);
         if (id == R.id.ppbtn) {
-            if(play){
+            if(videoView.isPlaying()){
                 videoView.pause();
                 play=false;
             }else{
